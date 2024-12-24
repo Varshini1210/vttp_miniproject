@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Create New Account</h1>
+    <form method="post" data-th-action="@{/account/create}" data-th-object="${newPerson}">
+        <div>
+            <label>Username</label>
+            <input type="text" name="username" data-th-field="*{username}" placeholder="Username">
+        </div>
+        <div class = "error" data-th-if="${#fields.hasErrors('username')}" data-th-errors="*{username}" ></div>
+        
+        <div>
+            <label>Email</label>
+            <input type = "text" name ="email" data-th-field ="*{email}" placeholder="Email">
+        </div>
+        <div class = "error" data-th-if="${#fields.hasErrors('email')}" data-th-errors="*{email}" ></div>
+        
+        <div>
+            <label>Password</label>
+            <input type ="password" name="password" data-th-field ="*{password}" placeholder="Password">
+        </div>
+        <div class = "error" data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}" ></div>
+        
+        <div>
+            <label>Re-enter Password</label>
+            <input type="password" name="password2" data-th-field="*{password2}" placeholder="Re-enter password">
+        </div>
+        <div class = "error" data-th-if="${#fields.hasErrors('password2')}" data-th-errors="*{password2}" ></div>
+        <div  data-th-if="${#fields.hasErrors('global')}">
+			<p data-th-each="err: ${#fields.errors('global')}">
+				<span class ="error" data-th-text="${err}"></span>
+			</p> 
+        </div>
+        <button type ="submit">Create Account</button>
+    </form>
+</body>
+</html>
