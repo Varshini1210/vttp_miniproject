@@ -3,7 +3,9 @@ package vttp.batch5.miniproject.models;
 import java.util.List;
 
 public class Book {
-
+    
+    private String listName;
+    private String listEncodedName;
     private String amazonProductUrl;
     private String author;
     private String bookImageUrl;
@@ -12,6 +14,7 @@ public class Book {
     private String isbn10;
     private String isbn13;
     private String publisher;
+    private Integer rank;
     private String title;
     public List<Buylink> buylinks;
     
@@ -110,6 +113,30 @@ public class Book {
 
     public void setBuylinks(List<Buylink> buylinks) {
         this.buylinks = buylinks;
+    }
+
+    public String getListName() {
+        return listName;
+    }
+
+    public void setListName(String listName) {
+        this.listName = listName;
+    }
+
+    public String getListEncodedName() {
+        return listEncodedName;
+    }
+
+    public void setListEncodedName(String listEncodedName) {
+        this.listEncodedName = listEncodedName;
+    }
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
     }
 
     

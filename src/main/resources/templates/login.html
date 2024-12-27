@@ -3,35 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .error {
-            color: red;
-        }
-    </style>
+    <title>Book-O-Mania</title>
+    <link rel="stylesheet" data-th-href="@{/style.css}">
+  
 </head>
 <body>
-    <h1>Login</h1>
-    <form method="post" data-th-action="@{/account/login}" data-th-object="${user}">
-        <div>
-            <label>Username</label>
-            <input type="text" name="username" data-th-field="*{username}" placeholder="Username">
+    <div class = "wrapper">
+        <div class = "heading">
+            <h1>Book-o-Mania</h1>
         </div>
-        <div class = "error" data-th-if="${#fields.hasErrors('username')}" data-th-errors="*{username}" ></div>
         
-        <div>
-            <label>Password</label>
-            <input type ="password" name="password" data-th-field ="*{password}" placeholder="Password">
+        <div class="horizontal-navbar">
+            <nav>
+                <a data-th-href="@{/home}">Home</a>
+                <a href="#wishlist">Wishlist</a>
+                
+                <!-- Dropdown for Genres -->
+                <div class="dropdown"  >
+                    <a href="#genres" class="dropbtn">Genres</a>
+                    <div class="dropdown-content"> >
+                        <a data-th-each = "listName: ${listNames}" data-th-href="@{/genres/{listName}(listName=${listName})}">
+                            <span data-th-text="${listName}"></span>
+                        </a>
+                    </div>
+                </div>
+                <a data-th-if="${username} == null" data-th-href="@{/account/login}">Login</a>
+                <a data-th-if="${username} != null" data-th-href="@{/account/logout}">Logout</a>
+            </nav>
         </div>
-        <div class = "error" data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}" ></div>
+        <div class="form-container">
+            <h1>Login</h1>
+            <form method="post" data-th-action="@{/account/login}" data-th-object="${user}">
+                <div class ="form-input">
+                    <label>Username</label>
+                    <input type="text" name="username" data-th-field="*{username}" placeholder="Username">
+                </div>
+                <div class = "error" data-th-if="${#fields.hasErrors('username')}" data-th-errors="*{username}" ></div>
+                
+                <div class="form-input">
+                    <label>Password</label>
+                    <input type ="password" name="password" data-th-field ="*{password}" placeholder="Password">
+                </div>
+                <div class = "error" data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}" ></div>
+                
+                <div  data-th-if="${#fields.hasErrors('global')}">
+                    <p data-th-each="err: ${#fields.errors('global')}">
+                        <span class ="error" data-th-text="${err}"></span>
+                    </p> 
+                </div>
+                <button type ="submit">Login</button>
+            </form>
+    
+        </div>
         
-        <div  data-th-if="${#fields.hasErrors('global')}">
-			<p data-th-each="err: ${#fields.errors('global')}">
-				<span class ="error" data-th-text="${err}"></span>
-			</p> 
+        <div class="hyperlink">
+            <a data-th-href="@{/account/create}">Create a new account</a>
+
         </div>
-        <button type ="submit">Login</button>
-    </form>
+        
+    </div>
+    
 </body>
 
 </html>

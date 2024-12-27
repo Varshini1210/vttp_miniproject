@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-O-Mania</title>
+    <link rel="stylesheet" data-th-href="@{/style.css}">
+</head>
+<body>
+    <div class ="wrapper">
+        <div class = "heading">
+            <h1>Book-o-Mania</h1>
+        </div>
+        
+        <div class="horizontal-navbar">
+            <nav>
+                <a data-th-href="@{/home}">Home</a>
+                <a href="#wishlist">Wishlist</a>
+                
+                <!-- Dropdown for Genres -->
+                <div class="dropdown"  >
+                    <a href="#genres" class="dropbtn">Genres</a>
+                    <div class="dropdown-content"> 
+                        <a data-th-each = "listName: ${listNames}" data-th-href="@{/genres/{listName}(listName=${listName})}">
+                            <span data-th-text="${listName}"></span>
+                        </a>
+                    </div>
+                </div>
+                <a data-th-if="${username} == null" data-th-href="@{/account/login}">Login</a>
+                <a data-th-if="${username} != null" data-th-href="@{/account/logout}">Logout</a>
+            </nav>
+        </div>
+
+        <div class="content">
+           
+            <!-- <div class="book-category" data-th-each="book: ${genreBooks.books}"> -->
+                
+                <div class = "book">
+                    
+                    <div class = "book-image" >
+                        <img data-th-src ="${book.bookImageUrl}">
+                    </div>
+                    <div class = "book-info">
+                        <h1><span data-th-text="${book.title}"></span></h1>
+                        <p>Rank this week: <span data-th-text="${book.rank}"></span></p>
+                        <p>Category: <span data-th-text ="${book.listName}"></span></p>
+                        <p>Author: <span data-th-text="${book.author}"></span></p>
+                        <p>Publisher: <span data-th-text = "${book.publisher}"></span></p>
+                        <p>Primary ISBN10: <span data-th-text = "${book.isbn10}"></span></p>
+                        <p>Primary ISBN13: <span data-th-text = "${book.isbn13}"></span></p>
+                        <p>Description: <span data-th-text ="${book.description}"></span></p>
+                        <div class ="all-links">
+                            <p>Buy Links: </p>
+                            <div class = "buy-links" data-th-each="buylink:${book.buylinks}">
+                                <a data-th-href="${buylink.linkUrl}"><span data-th-text ="${buylink.linkName}"></span></a>
+                            </div>
+                        </div>
+                        
+                        <button class = "search-button" >Add to Wishlist</button>
+                        
+                        
+                        
+
+                    
+                </div>
+            <!-- </div> -->
+         
+        </div>
+        
+    </div>
+</body>
+</html>

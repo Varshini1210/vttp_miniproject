@@ -7,7 +7,7 @@ public class User {
     @NotEmpty(message="Username is a compulsory field")
     private String username;
     
-    @NotEmpty(message="Username is a compulsory field")
+    @NotEmpty(message="Password is a compulsory field")
     private String password;
     
     public User(String username, String password) {

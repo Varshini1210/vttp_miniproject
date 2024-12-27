@@ -26,25 +26,25 @@ public class BookService {
 
     RestTemplate restTemplate = new RestTemplate();
 
+    private String FullOverviewUrl = "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?";
     private String overviewUrl = "https://api.nytimes.com/svc/books/v3/lists/overview.json?";
     List<BookList> bookLists;
+
     
     public List<BookList> getBookLists() {
         return bookLists;
     }
 
-   
-   
     public BookService(@Value("${books.apikey}")String apiKey){
 
         this.apiKey = apiKey;
         
-        overviewUrl = overviewUrl + "api-key="+apiKey;
+        String FinalUrl = FullOverviewUrl + "api-key="+apiKey;
         
         if (bookLists == null){
             bookLists = new ArrayList<>();
         
-            ResponseEntity<String> booksData = restTemplate.getForEntity(overviewUrl,String.class);
+            ResponseEntity<String> booksData = restTemplate.getForEntity(FinalUrl,String.class);
             String booksInfo =  booksData.getBody();
 
             JsonReader jReader = Json.createReader(new StringReader(booksInfo));
@@ -63,6 +63,7 @@ public class BookService {
                 for (int j=0; j<jbooks.size();j++){
 
                     Book book = new Book();
+                    book.setListName(jArray.get(i).asJsonObject().getString("list_name"));
                     book.setAmazonProductUrl(jbooks.get(j).asJsonObject().getString("amazon_product_url"));
                     book.setAuthor(jbooks.get(j).asJsonObject().getString("author"));
                     book.setBookImageUrl(jbooks.get(j).asJsonObject().getString("book_image"));
@@ -71,6 +72,7 @@ public class BookService {
                     book.setIsbn10(jbooks.get(j).asJsonObject().getString("primary_isbn10"));
                     book.setIsbn13(jbooks.get(j).asJsonObject().getString("primary_isbn13"));
                     book.setPublisher(jbooks.get(j).asJsonObject().getString("publisher"));
+                    book.setRank(jbooks.get(j).asJsonObject().getJsonNumber("rank").intValue());
                     book.setTitle(jbooks.get(j).asJsonObject().getString("title"));
 
                     List<Buylink> buylinks = new ArrayList<>();
@@ -95,6 +97,71 @@ public class BookService {
         System.out.println(bookLists);
         
         // return bookLists;
+    }
+
+    public List<String> getListNames(){
+        List<String> listNames = new ArrayList<>();
+        for (BookList booklist: bookLists){
+            listNames.add(booklist.getListName());
+        }
+        return listNames;
+    }
+
+    public List<BookList> getTop5 (){
+        List<BookList> top5Lists = new ArrayList<>();
+        for (BookList booklist: bookLists){
+            BookList top5Genre = new BookList();
+            top5Genre.setListName(booklist.getListName());
+            top5Genre.setListEncodedName(booklist.getListEncodedName());
+            List<Book> top5Books = new ArrayList<>();
+            List<Book> books = booklist.getBooks();
+            for (Book book: books){
+                if (book.getRank() <=5){
+                    top5Books.add(book);
+                }
+            }
+            top5Genre.setBooks(top5Books);
+            top5Lists.add(top5Genre);
+        }
+
+        return top5Lists;
+    }
+   
+    public BookList getGenreBooks(String listName){
+        BookList genreBooks = new BookList();
+        for (BookList booklist: bookLists){
+            if (booklist.getListName().equals(listName)){
+                genreBooks = booklist;
+            }
+        }
+        return genreBooks;
+    }
+
+    public Book retrieveBook (String bookName, String genre){
+        Book reqBook = new Book();
+        for(BookList booklist: bookLists){
+            if((booklist.getListName()).equals(genre)){
+                for (Book book: booklist.getBooks()){
+                    if(book.getTitle().equals(bookName)){
+                        reqBook = book;
+                    }
+                }
+            }
+        }
+        return reqBook;
+    }
+
+    public List<Book> searchForBook(String searchQuery){
+        searchQuery = searchQuery.toUpperCase().strip();
+        List<Book> searchResults = new ArrayList<>();
+        for (BookList booklist: bookLists){
+            for(Book book: booklist.getBooks()){
+                if(book.getTitle().equals(searchQuery)){
+                    searchResults.add(book);
+                }
+            }
+        }
+        return searchResults;
     }
     
 }
