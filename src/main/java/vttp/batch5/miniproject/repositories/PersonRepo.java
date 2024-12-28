@@ -17,20 +17,32 @@ public class PersonRepo {
     @Qualifier("template01")
     RedisTemplate<String, String> redisTemplate;
 
-    public void createNewAcc (String redisKey, String hashKey, String hashValue){
-        redisTemplate.opsForHash().put(redisKey, hashKey, hashValue);
+    public void createNewAcc (String username, String accountDetails){
+        redisTemplate.opsForHash().put(username, "account", accountDetails);
     }
 
-    public Object getUserDetails(String redisKey, String hashKey){
-        return redisTemplate.opsForHash().get(redisKey,hashKey);
+    public String getUserDetails(String username){
+        return redisTemplate.opsForHash().get(username,"account").toString();
     }
 
-    public Long delete(String redisKey, String hashKey) {
-        return redisTemplate.opsForHash().delete(redisKey,hashKey);
+    public Boolean userExists(String username){
+        return redisTemplate.opsForHash().hasKey(username,"account");
     }
 
-    public Boolean userExists(String redisKey, String hashKey){
-        return redisTemplate.opsForHash().hasKey(redisKey,hashKey);
+    public Boolean wishListExists(String username){
+        return redisTemplate.opsForHash().hasKey(username,"wishlist");
+    }
+
+    public void addToWishList (String username, String wishlist){
+        redisTemplate.opsForHash().put(username, "wishlist", wishlist);
+    }
+
+    public String getWishList(String username){
+        return redisTemplate.opsForHash().get(username,"wishlist").toString();
+    }
+
+    public Long deleteWishList(String username) {
+        return redisTemplate.opsForHash().delete(username,"wishlist");
     }
 
     public Map<Object, Object> getEntries(String redisKey){

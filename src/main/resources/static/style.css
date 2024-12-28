@@ -185,6 +185,29 @@ form button{
     background-color: #575757;
 }
 
+.delete {
+    display: inline-block; /* Ensure the form aligns inline */
+    margin-right: 10px;    /* Add spacing between the buttons */
+    height: auto;          /* Let the height adjust dynamically */
+    width: auto;           /* Let the width adjust dynamically */
+}
+
+.delete-button {
+    padding: 10px 20px;         /* Adjust button padding */
+    font-size: 17px;            /* Keep font size consistent */
+    background-color: rgb(88, 2, 2); /* Background color */
+    color: white;               /* Text color */
+    border: none;               /* Remove borders */
+    border-radius: 4px;         /* Rounded corners */
+    cursor: pointer;            /* Pointer cursor on hover */
+    display: inline-block;      /* Ensure it aligns inline */
+    margin: 0;                  /* Remove extra margin */
+}
+
+.delete-button:hover {
+    background-color: #575757;  /* Darker background on hover */
+}
+
 .result-container {
     display: flex;
     flex-wrap: wrap; /* Ensures items wrap to the next line if they don't fit */

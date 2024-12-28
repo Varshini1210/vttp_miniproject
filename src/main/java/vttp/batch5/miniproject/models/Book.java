@@ -139,5 +139,10 @@ public class Book {
         this.rank = rank;
     }
 
+    @Override
+    public String toString() {
+        return title + author + listName;
+    }
+
     
 }

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import vttp.batch5.miniproject.models.BookList;
 import vttp.batch5.miniproject.models.NewPerson;
 import vttp.batch5.miniproject.models.User;
 import vttp.batch5.miniproject.services.BookService;
@@ -64,7 +63,7 @@ public class AccountController {
         }
         //create new user and redirect to login
         personService.createNewAcc(np);
-        return "login";
+        return "redirect:/account/login";
     }
 
     @GetMapping("/login")

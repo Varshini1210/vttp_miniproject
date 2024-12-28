@@ -15,7 +15,7 @@
         <div class="horizontal-navbar">
             <nav>
                 <a data-th-href="@{/home}">Home</a>
-                <a href="#wishlist">Wishlist</a>
+                <a data-th-href="@{/wishlist}">Wishlist</a>
                 
                 <!-- Dropdown for Genres -->
                 <div class="dropdown"  >
@@ -55,8 +55,13 @@
                                 <a data-th-href="${buylink.linkUrl}"><span data-th-text ="${buylink.linkName}"></span></a>
                             </div>
                         </div>
+                        <form action="/wishlist" method="POST">
+                            <input type="hidden" name="title" data-th-value="${book.title}">
+                            <input type="hidden" name="author" data-th-value="${book.author}">
+                            <input type="hidden" name="listName" data-th-value="${book.listName}">
+                            <button type = "submit" class = "search-button" >Add to Wishlist</button>
+                        </form>
                         
-                        <button class = "search-button" >Add to Wishlist</button>
                         
                         
                         
