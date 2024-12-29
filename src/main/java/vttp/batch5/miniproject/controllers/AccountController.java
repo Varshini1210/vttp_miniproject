@@ -40,7 +40,8 @@ public class AccountController {
 
     @PostMapping("/create")
     public String postCreate(@Valid @ModelAttribute("newPerson") NewPerson np, BindingResult result, Model model){
-        
+        List<String> listNames = bookService.getListNames();
+        model.addAttribute("listNames",listNames);
         if(result.hasErrors()){
             return "newacc";
         }
