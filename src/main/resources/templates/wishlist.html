@@ -32,79 +32,55 @@
         </div>
 
         <div class="content">
-            <div data-th-if="${username!=null}" class="welcome-message">
-                <p>Welcome, <span data-th-text="${username}"></span></p>
-            </div>
 
-            <div data-th-if="${errorMessage1 !=null}" class="error">
+            <div data-th-if="${errorMessage1 !=null}" class="wishlist-error">
                 <p><span data-th-text=${errorMessage1}></span></p>
             </div>
 
-            <div data-th-if="${errorMessage2 !=null}" class="error">
+            <div data-th-if="${errorMessage2 !=null}" class="wishlist-error">
                 <p><span data-th-text=${errorMessage2}></span></p>
             </div>
 
-            <div data-th-if="${errorMessage3 !=null}" class="error">
+            <div data-th-if="${errorMessage3 !=null}" class="wishlist-error">
                 <p><span data-th-text=${errorMessage3}></span></p>
             </div>
 
-            <div data-th-if="${successMessage !=null}" class="error">
+            <div data-th-if="${successMessage !=null}" class="wishlist-success">
                 <p><span data-th-text=${successMessage}></span></p>
             </div>
 
             <div data-th-if="${wishlist != null}"class = "search-results">
+
                 <h1>Your Wishlist</h1>
+
                 <div data-th-each="result:${wishlist}" class="result-container">
+
                     <div class = "image-result" >
                         <img class = "image" data-th-src ="${result.bookImageUrl}">
                     </div>
+
                     <div class ="book-summary">
+
                         <p>Title: <span data-th-text ="${result.title}"></span></p>
                         <p>Category: <span data-th-text ="${result.listName}"></span></p>
                         <p>Description: <span data-th-text ="${result.description}"></span></p>
                         <a class= "next" data-th-href = "@{/genres/{genre}/book/{title}(genre=${result.listName},title=${result.title})}"><span>View More</span></a>
+
                         <form class="delete" method = "POST"data-th-action ="@{/wishlist/delete}">
                             <input type="hidden" name="title" data-th-value="${result.title}">
                             <input type="hidden" name="author" data-th-value="${result.author}">
                             <input type="hidden" name="listName" data-th-value="${result.listName}">
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <!-- <form method="POST" data-th-action="@{/search}">
-
-                <div class="search-bar-container">
-                    <input type="text" class="search-bar" name="search" placeholder="Enter the title...">
-                    <button type="submit" class="search-button">Search</button>
-                </div>
-            </form> -->
-                
-            
-            <!-- <div class = books>
-                <h1>Recommended</h1>
-            </div>
-            <div class="books-result" data-th-each="booklist: ${booklists}">
-                <h3 data-th-text="${booklist.listName}"></h3>
-                <div class = "result-container">
-                    <div class = "image-result" data-th-each="book: ${booklist.books}">
-                        <img class = "image" data-th-src ="${book.bookImageUrl}">
-                        <p class="title"><a data-th-href = "@{/genres/{genre}/book/{title}(genre=${book.listName},title=${book.title})}"><span data-th-text="${book.title}"></span></a></p>
 
                     </div>
-                    
-                    
+
                 </div>
-                <div class="next-button">
-                    <a class="next" data-th-href="@{/genres/{listName}(listName=${booklist.listName})}">See More...</a>
-                </div>
-                
-            </div> -->
-            <!-- <p>Page content goes here...</p> -->
+
+            </div>
+
         </div>
+        
     </div>
     
 </body>

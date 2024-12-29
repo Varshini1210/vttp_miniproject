@@ -8,10 +8,7 @@ public class BookList {
     private String listEncodedName;
     private List<Book> books;
     
-    public BookList(String listName, List<Book> books) {
-        this.listName = listName;
-        this.books = books;
-    }
+  
 
     public BookList() {
     }

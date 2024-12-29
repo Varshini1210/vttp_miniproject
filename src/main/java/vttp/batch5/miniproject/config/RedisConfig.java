@@ -12,7 +12,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig {
 
-    //slide 17
 
     @Value("${spring.data.redis.host}")
     private String redisHost;
@@ -26,7 +25,6 @@ public class RedisConfig {
     @Value("${spring.data.redis.password}")
     private String redisPassword;
 
-    // slide 18
 
     @Bean
     public JedisConnectionFactory jedisConnectionFactory() {
@@ -46,15 +44,6 @@ public class RedisConfig {
         return jcf;
     }
 
-    // @Bean(Constant.template01)
-    // public RedisTemplate<String, String> redisObjectTemplate01(){
-    //     RedisTemplate<String,String> template = new RedisTemplate<>();
-    //     template.setConnectionFactory(jedisConnectionFactory());
-    //     template.setKeySerializer(new StringRedisSerializer());
-    //     template.setValueSerializer(new StringRedisSerializer());
-
-    //     return template;
-    // }
 
     @Bean("template01")
     public RedisTemplate<String, String> redisObjectTemplate02(){

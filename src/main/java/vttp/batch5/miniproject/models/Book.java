@@ -18,19 +18,6 @@ public class Book {
     private String title;
     public List<Buylink> buylinks;
     
-    public Book(String amazonProductUrl, String author, String bookImageUrl, String description, String price,
-            String isbn10, String isbn13, String publisher, String title, List<Buylink> buylinks) {
-        this.amazonProductUrl = amazonProductUrl;
-        this.author = author;
-        this.bookImageUrl = bookImageUrl;
-        this.description = description;
-        this.price = price;
-        this.isbn10 = isbn10;
-        this.isbn13 = isbn13;
-        this.publisher = publisher;
-        this.title = title;
-        this.buylinks = buylinks;
-    }
 
     public Book() {
     }
@@ -139,10 +126,7 @@ public class Book {
         this.rank = rank;
     }
 
-    @Override
-    public String toString() {
-        return title + author + listName;
-    }
+
 
     
 }

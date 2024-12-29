@@ -1,10 +1,5 @@
 package vttp.batch5.miniproject.repositories;
 
-import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -45,27 +40,12 @@ public class PersonRepo {
         return redisTemplate.opsForHash().delete(username,"wishlist");
     }
 
-    public Map<Object, Object> getEntries(String redisKey){
-        return redisTemplate.opsForHash().entries(redisKey);
-        
-    }
+   
 
-    public Set<Object> getKeys (String redisKey){
-        return redisTemplate.opsForHash().keys(redisKey);
-    }
+  
+   
 
-    public List<Object> getValues(String redisKey){
-        return redisTemplate.opsForHash().values(redisKey);
-    }
+   
 
-    public long size(String redisKey){
-        return redisTemplate.opsForHash().size(redisKey);
-
-    }
-
-    public void expire(String redisKey, long expireValue){
-
-        Duration expireDuration = Duration.ofSeconds(expireValue);
-        redisTemplate.expire(redisKey, expireDuration);
-    }
+    
 }

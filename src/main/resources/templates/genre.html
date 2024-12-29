@@ -37,21 +37,19 @@
             <div class = books>
                 <h1><span data-th-text="${genreBooks.listName}"></span></h1>
             </div>
-            <!-- <div class="book-category" data-th-each="book: ${genreBooks.books}"> -->
                 
             <div class = "result-container">
+
                 <div class = "image-result" data-th-each="book: ${genreBooks.books}">
                     <img class = "image" data-th-src ="${book.bookImageUrl}">
                     <p class="title"><a data-th-href = "@{/genres/{genre}/book/{title}(genre=${book.listName},title=${book.title})}"><span data-th-text="${book.title}"></span></a></p>
                 </div>
                 
             </div>
-            
          
         </div>
         
     </div>
-    
     
 </body>
 </html>

@@ -32,14 +32,13 @@
         </div>
 
         <div class="content">
-           
-            <!-- <div class="book-category" data-th-each="book: ${genreBooks.books}"> -->
-                
+
                 <div class = "book">
-                    
+
                     <div class = "book-image" >
                         <img data-th-src ="${book.bookImageUrl}">
                     </div>
+
                     <div class = "book-info">
                         <h1><span data-th-text="${book.title}"></span></h1>
                         <p>Rank this week: <span data-th-text="${book.rank}"></span></p>
@@ -49,29 +48,29 @@
                         <p>Primary ISBN10: <span data-th-text = "${book.isbn10}"></span></p>
                         <p>Primary ISBN13: <span data-th-text = "${book.isbn13}"></span></p>
                         <p>Description: <span data-th-text ="${book.description}"></span></p>
+
                         <div class ="all-links">
+
                             <p>Buy Links: </p>
+
                             <div class = "buy-links" data-th-each="buylink:${book.buylinks}">
                                 <a data-th-href="${buylink.linkUrl}"><span data-th-text ="${buylink.linkName}"></span></a>
                             </div>
+
                         </div>
+
                         <form action="/wishlist" method="POST">
                             <input type="hidden" name="title" data-th-value="${book.title}">
                             <input type="hidden" name="author" data-th-value="${book.author}">
                             <input type="hidden" name="listName" data-th-value="${book.listName}">
                             <button type = "submit" class = "search-button" >Add to Wishlist</button>
-                        </form>
-                        
-                        
-                        
-                        
+                        </form>  
 
-                    
                 </div>
-            <!-- </div> -->
-         
+
         </div>
-        
+
     </div>
+    
 </body>
 </html>

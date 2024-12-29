@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.json.Json;
-import jakarta.json.JsonObject;
-import vttp.batch5.miniproject.constant.Constant;
+import jakarta.json.JsonArray;
+import jakarta.json.JsonArrayBuilder;
 import vttp.batch5.miniproject.models.Book;
 import vttp.batch5.miniproject.models.NewPerson;
 import vttp.batch5.miniproject.models.User;
@@ -34,10 +34,6 @@ public class PersonService {
 
     public void createNewAcc(NewPerson np){
         String accountDetails = np.toString();
-        // JsonObject account = Json.createObjectBuilder()
-        //                         .add("username",np.getUsername())
-        //                         .add("password",np.getPassword())
-        //                         .build();
 
         personRepo.createNewAcc(np.getUsername(), accountDetails);
     }
@@ -119,10 +115,25 @@ public class PersonService {
             personRepo.deleteWishList(username);
         }
         
+    }
+
+    public JsonArray jsonWishList(String username){
+        List<Book> wishlist = getWishList(username);
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        for (Book book:wishlist){
+            arrayBuilder.add(
+                Json.createObjectBuilder()
+                    .add("title",book.getTitle())
+                    .add("author",book.getAuthor())
+                    .add("category",book.getListName())
+                    .build()
+                    );   
+        }
+        JsonArray wishListArray = arrayBuilder.build();
+        return wishListArray;
+            
         
-       
-        
-        
+
     }
     
 }

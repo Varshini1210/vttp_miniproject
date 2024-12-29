@@ -7,11 +7,6 @@ public class Buylink {
 
     public Buylink() {
     }
-
-    public Buylink(String linkName, String linkUrl) {
-        this.linkName = linkName;
-        this.linkUrl = linkUrl;
-    }
     
     public String getLinkName() {
         return linkName;

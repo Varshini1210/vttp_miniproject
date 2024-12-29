@@ -33,41 +33,47 @@
         </div>
 
         <div class="content">
+
             <div data-th-if="${username!=null}" class="welcome-message">
                 <p>Welcome, <span data-th-text="${username}"></span></p>
             </div>
+
             <form method="POST" data-th-action="@{/search}">
 
                 <div class="search-bar-container">
                     <input type="text" class="search-bar" name="search" placeholder="Enter the title...">
                     <button type="submit" class="search-button">Search</button>
                 </div>
+
             </form>
                 
             
             <div class = books>
                 <h1>Recommended</h1>
             </div>
+
             <div class="books-result" data-th-each="booklist: ${booklists}">
+
                 <h3 data-th-text="${booklist.listName}"></h3>
+
                 <div class = "result-container">
+
                     <div class = "image-result" data-th-each="book: ${booklist.books}">
                         <img class = "image" data-th-src ="${book.bookImageUrl}">
                         <p class="title"><a data-th-href = "@{/genres/{genre}/book/{title}(genre=${book.listName},title=${book.title})}"><span data-th-text="${book.title}"></span></a></p>
-
                     </div>
                     
-                    
                 </div>
+
                 <div class="next-button">
                     <a class="next" data-th-href="@{/genres/{listName}(listName=${booklist.listName})}">See More...</a>
                 </div>
                 
             </div>
-            <!-- <p>Page content goes here...</p> -->
+           
         </div>
+
     </div>
-    
     
 </body>
 </html>

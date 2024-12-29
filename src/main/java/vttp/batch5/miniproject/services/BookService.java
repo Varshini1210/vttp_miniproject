@@ -26,7 +26,6 @@ public class BookService {
     RestTemplate restTemplate = new RestTemplate();
 
     private String FullOverviewUrl = "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?";
-    private String overviewUrl = "https://api.nytimes.com/svc/books/v3/lists/overview.json?";
     List<BookList> bookLists;
 
     
@@ -92,10 +91,8 @@ public class BookService {
                 bookLists.add(booklist);
             }
         }
-
-        System.out.println(bookLists);
         
-        // return bookLists;
+       
     }
 
     public List<String> getListNames(){

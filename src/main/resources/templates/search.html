@@ -33,12 +33,14 @@
         </div>
 
         <div class="content">
+
             <form method="POST" data-th-action="@{/search}">
+
                 <div class="search-bar-container">
-                
                     <input type="text" class="search-bar" name="search" placeholder="Enter the title...">
                     <button type="submit" class="search-button">Search</button>
                 </div>
+
             </form>
 
             <div data-th-if="${errorMsg !=null}" class="error">
@@ -46,35 +48,29 @@
             </div>
 
             <div data-th-if="${searchResults != null}"class = "search-results">
+
                 <h1>Search Results</h1>
+
                 <div data-th-each="result:${searchResults}" class="result-container">
+
                     <div class = "image-result" >
                         <img class = "image" data-th-src ="${result.bookImageUrl}">
                     </div>
+
                     <div class ="book-summary">
                         <p>Title: <span data-th-text ="${result.title}"></span></p>
                         <p>Category: <span data-th-text ="${result.listName}"></span></p>
                         <p>Description: <span data-th-text ="${result.description}"></span></p>
                         <a class= "next" data-th-href = "@{/genres/{genre}/book/{title}(genre=${result.listName},title=${result.title})}"><span>View More</span></a>
                     </div>
-                </div>
-            </div>
 
-           
-            <!-- <div class="book-category" data-th-each="booklist: ${booklists}">
-                <h3 data-th-text="${booklist.listName}"></h3>
-                <div class = "image-container">
-                    <div class = "images" data-th-each="book: ${booklist.books}">
-                        <img id = image data-th-src ="${book.bookImageUrl}">
-                        <p id="title"><a data-th-href = "@{/genres/{genre}/book/{title}(genre=${book.listName},title=${book.title})}"><span data-th-text="${book.title}"></span></a></p>
-                    </div>
                 </div>
-                <a data-th-href="@{/genres/{listName}(listName=${booklist.listName})}">See More...</a>
-            </div> -->
-            <!-- <p>Page content goes here...</p> -->
+
+            </div>
+            
         </div>
+
     </div>
-    
     
 </body>
 </html>
